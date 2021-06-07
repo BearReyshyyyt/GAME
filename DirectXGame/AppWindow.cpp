@@ -20,5 +20,5 @@ void AppWindow::onUpdate()
 
 void AppWindow::onDestroy() 
 {
-	Window::onDestroy();
+	Window::onDestroy(); 
 }
