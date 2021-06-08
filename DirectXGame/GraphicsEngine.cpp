@@ -1,14 +1,9 @@
+#include <iostream>
 #include "GraphicsEngine.h"
-
+#include "SwapChain.h"
 
 GraphicsEngine::GraphicsEngine()
 {
-}
-
-GraphicsEngine * GraphicsEngine::get()
-{
-	static GraphicsEngine engine;
-	return &engine;
 }
 
 bool GraphicsEngine::init()
@@ -28,7 +23,7 @@ bool GraphicsEngine::init()
 		D3D_FEATURE_LEVEL_11_0
 	};
 			
-	UINT num_feature_levels = ARRAYSIZE(driver_types);
+	UINT num_feature_levels = ARRAYSIZE(feature_levels);
 
 	// initialize the result of the driver result to 0 so if not found we can detect it
 	HRESULT res = 0;
@@ -45,19 +40,31 @@ bool GraphicsEngine::init()
 			break;
 		}
 		// check next driver
+		std::cout << "checking next driver" << std::endl;
 			++driver_type_index;
 	}
 
 	// if no match was found then return false
 	if (FAILED(res)) {
+		std::cout << "this happened" << std::endl;
 		return false;
 	}
+
+
+	m_d3d_device->QueryInterface(__uuidof(IDXGIDevice), (void**)&m_dxgi_device);
+	m_dxgi_device->GetParent(__uuidof(IDXGIAdapter), (void**)&m_dxgi_adapter);
+	m_dxgi_adapter->GetParent(__uuidof(IDXGIFactory), (void**)&m_dxgi_factory);
 	
 	return true;
 }
 
+
 bool GraphicsEngine::release()
 { 
+	m_dxgi_device->Release();
+	m_dxgi_adapter->Release();
+	m_dxgi_factory->Release();
+
 	m_imm_context->Release();
 	m_d3d_device->Release(); 
 	return true;
@@ -65,4 +72,16 @@ bool GraphicsEngine::release()
 
 GraphicsEngine::~GraphicsEngine()
 {
+}
+
+SwapChain * GraphicsEngine::createSwapChain()
+{
+	return new SwapChain();
+}
+
+
+GraphicsEngine * GraphicsEngine::get()
+{
+	static GraphicsEngine engine;
+	return &engine;
 }
