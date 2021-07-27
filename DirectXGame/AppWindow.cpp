@@ -237,7 +237,7 @@ void AppWindow::onKeyUp(int key)
 	else if (key == 'S')
 	{ 
 		m_rot_x -= 3.14f*m_delta_time;
-	}
+	} 
 	if (key == 'A')
 	{
 		m_rot_y += 3.14f*m_delta_time;
