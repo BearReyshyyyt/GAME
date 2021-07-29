@@ -166,7 +166,7 @@ void AppWindow::onCreate()
 }
 
 void AppWindow::onUpdate()
-{
+{ 
 	Window::onUpdate();
 
 	InputSystem::get()->update();
