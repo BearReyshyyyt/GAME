@@ -26,7 +26,7 @@ AppWindow::AppWindow()
 {
 }
 
-void AppWindow::updateQuadPosition()
+void AppWindow::update()
 {
 	constant cc;
 	cc.m_time = ::GetTickCount();
@@ -46,7 +46,7 @@ void AppWindow::updateQuadPosition()
 
 	//cc.m_world *= temp;
 
-	cc.m_world.setScale(Vector3D(m_scale_cube, m_scale_cube, m_scale_cube));
+	/*cc.m_world.setScale(Vector3D(m_scale_cube, m_scale_cube, m_scale_cube));
 
 	temp.setIdentity();
 	temp.setRotationZ(0.0f);
@@ -58,10 +58,24 @@ void AppWindow::updateQuadPosition()
 
 	temp.setIdentity();
 	temp.setRotationX(m_rot_x);
-	cc.m_world *= temp;
+	cc.m_world *= temp;*/
 
 
-	cc.m_view.setIdentity();
+	Matrix4x4 world_cam;
+
+	temp.setIdentity();
+	temp.setRotationX(m_rot_x);
+	world_cam *= temp; 
+
+	temp.setIdentity();
+	temp.setRotationY(m_rot_y);
+	world_cam *= temp;
+
+	world_cam.setTranslation(Vector3D(0, 0, -2));
+
+	world_cam.inverse();
+
+	cc.m_view = world_cam;
 	cc.m_proj.setOrthoLH
 	(
 		(this->getClientWindowRect().right - this->getClientWindowRect().left) / 300.0f,
@@ -181,7 +195,7 @@ void AppWindow::onUpdate()
 
 
 
-	updateQuadPosition();
+	update();
 
 
 

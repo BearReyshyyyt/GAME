@@ -15,7 +15,7 @@ class AppWindow : public Window, public InputListener
 public:
 	AppWindow();
 
-	void updateQuadPosition();
+	void update();
 
 	~AppWindow();
 

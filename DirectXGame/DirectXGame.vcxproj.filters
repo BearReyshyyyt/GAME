@@ -107,9 +107,6 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>GameEngine\GraphicsEngine\ConstantBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>GameEngine\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix4x4.h">
       <Filter>GameEngine\Math</Filter>
     </ClInclude>
@@ -124,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.h">
+      <Filter>GameEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>GameEngine\InputSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
